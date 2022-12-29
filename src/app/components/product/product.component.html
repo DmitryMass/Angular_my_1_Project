@@ -1,0 +1,35 @@
+<div class="py-4 px-6 border rounded flex items-center flex-col mb-2">
+  <img
+    class="max-w-[200px] w-full mb-2"
+    [src]="product.image"
+    [alt]="product.title"
+  />
+  <h2 class="mb-2 text-md text-center">{{ product.title }}</h2>
+  <p>
+    Price: <span class="font-bold">{{ product.price | currency : "UAH" }}</span>
+  </p>
+
+  <button
+    class="border py-2 px-4 rounded bg-yellow-400"
+    [ngClass]="{
+      'bg-yellow-400': !details,
+      'bg-blue-400': details
+    }"
+    (click)="details = !details"
+  >
+    {{ details ? "Hide" : "Show" }} Details
+  </button>
+
+  <!-- ngIf структурная дериктива, скрывающая ил показывающая контент -->
+  <div *ngIf="details">
+    <p>{{ product.description }}</p>
+    <!-- пример работы с инлайнстилями -->
+    <p>
+      Rate:
+      <span [ngStyle]="{ fontWeight: 'bold' }">{{
+        product.rating.rate | number : "1.2"
+      }}</span>
+    </p>
+  </div>
+</div>
+<!-- интерполяция используется только если данніе можно преорбразовать в строку {{data ... }} -->
